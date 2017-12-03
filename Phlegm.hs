@@ -6,6 +6,8 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
+module Phlegm where
+
 import Freer
 import Formulae
 
@@ -249,7 +251,7 @@ goParent = go moveToParent
 runPhlegm :: Phlegm a -> Prover a
 runPhlegm (Pure x) = pure x
 runPhlegm (Free m q) = do
-    a <- traceUnPhlegm m
+    a <- unPhlegm m
     runPhlegm (q a)
 
 traceUnPhlegm :: PhlegmCommand a -> Prover a
